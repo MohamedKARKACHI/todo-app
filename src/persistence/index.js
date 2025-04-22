@@ -1,2 +1,2 @@
-if (process.env.MYSQL_HOST) module.exports = require('./mysql');
-else module.exports = require('./sqlite');
+const dbType = process.env.DB_TYPE || 'sqlite';
+module.exports = dbType === 'mysql' ? require('./mysql') : require('./sqlite');

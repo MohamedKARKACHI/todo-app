@@ -1,5 +1,16 @@
-FROM node:12-alpine
-WORKDIR /app
-COPY . .
+FROM node:18.18-alpine
+
+# Install git
+RUN apk add --no-cache git
+
+# Copy local files
+COPY . /todo-app
+
+# Set the working directory
+WORKDIR /todo-app
+
+# Install dependencies
 RUN yarn install --production
-CMD ["node", "/app/src/index.js"]
+
+# Start the application
+CMD ["yarn", "run", "dev"]
